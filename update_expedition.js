@@ -1,6 +1,6 @@
 /**
  * 遠征報告書v2.1
- * @version 1.0.1
+ * @version 1.0.2
  * @author Nishisonic
  */
 
@@ -142,10 +142,17 @@ function getContent(data) {
     })(data.jsonObject.api_data.api_clear_result.intValue())
   )
   content.push(data.jsonObject.api_data.api_quest_name.toString())
-  content.push(data.jsonObject.api_data.api_get_material[0].intValue())
-  content.push(data.jsonObject.api_data.api_get_material[1].intValue())
-  content.push(data.jsonObject.api_data.api_get_material[2].intValue())
-  content.push(data.jsonObject.api_data.api_get_material[3].intValue())
+  if (data.jsonObject.api_data.api_clear_result.intValue() === 0) {
+    content.push(0)
+    content.push(0)
+    content.push(0)
+    content.push(0)
+  } else {
+    content.push(data.jsonObject.api_data.api_get_material[0].intValue())
+    content.push(data.jsonObject.api_data.api_get_material[1].intValue())
+    content.push(data.jsonObject.api_data.api_get_material[2].intValue())
+    content.push(data.jsonObject.api_data.api_get_material[3].intValue())
+  }
   for (var i = 0; i < 2; i++) {
     var useItemFlag = data.jsonObject.api_data.api_useitem_flag[i].intValue()
     if (useItemFlag > 0) {
