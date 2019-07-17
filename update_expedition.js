@@ -1,6 +1,6 @@
 /**
  * 遠征報告書v2.1
- * @version 1.0.2
+ * @version 1.0.3
  * @author Nishisonic
  */
 
@@ -10,15 +10,15 @@ GlobalContext = Java.type('logbook.data.context.GlobalContext')
 UseItem = Java.type('logbook.internal.UseItem')
 
 PrintWriter = Java.type('java.io.PrintWriter')
-Charset = Java.type('java.nio.charset.Charset')
+StandardCharsets = Java.type('java.nio.charset.StandardCharsets')
 Files = Java.type('java.nio.file.Files')
 Paths = Java.type('java.nio.file.Paths')
 StandardOpenOption = Java.type('java.nio.file.StandardOpenOption')
 SimpleDateFormat = Java.type('java.text.SimpleDateFormat')
 Date = Java.type('java.util.Date')
 
-var PATH = Paths.get('遠征報告書v2.1.csv')
-var PATH2 = Paths.get('遠征報告書v2.1_alternative.csv')
+var PATH = Paths.get('遠征報告書v2.2.csv')
+var PATH2 = Paths.get('遠征報告書v2.2_alternative.csv')
 
 function update(type, data) {
   switch (type) {
@@ -36,14 +36,14 @@ function write(s, p) {
     var path = p === undefined ? PATH : p
     if (Files.notExists(path)) {
       pw = new PrintWriter(
-        Files.newBufferedWriter(path, Charset.defaultCharset())
+        Files.newBufferedWriter(path, StandardCharsets.UTF_8)
       )
       pw.println(getHeader())
     } else {
       pw = new PrintWriter(
         Files.newBufferedWriter(
           path,
-          Charset.defaultCharset(),
+          StandardCharsets.UTF_8,
           StandardOpenOption.WRITE,
           StandardOpenOption.APPEND
         )
